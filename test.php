@@ -5,8 +5,49 @@ require 'DXFwriter.php';
 
 $d = new DxfWriter();
 
+$dw=$_POST['dw'];
+$dh=$_POST['dh'];
+
+////////////How to insert text//////////////
+$txt['text'] = $_POST['text'] ;
+$txt['point'] = array($dw/2,$dh/2,0);
+$txt['height'] = $_POST['text_height'];
+$txt_str=new DxfText($txt);
+$d->append($txt_str);
+
+
+/////////////How to draw polyline///////////
+
+$poly['points']=array	(
+							array(0,0),
+							array($dw,0), 
+							array($dw,$dh), 
+							array(0,$dh),
+							array(0,0)
+						);
+$door_str=new DxfPolyLine($poly);
+$d->append($door_str);
+
+//$dw=$_POST['dw']-5;
+//$dh=$_POST['dh']-5;
+
+$poly['points']=array	(
+							array(0+3,0+3),
+							array($dw-3,0+3), 
+							array($dw-3,$dh-3), 
+							array(0+3,$dh-3),
+							array(0+3,0+3)
+						);
+$door_str=new DxfPolyLine($poly);
+$d->append($door_str);
+///////////How to download file/////////////
+$d->saveDownload('test.dxf');
+/////////////////////////////////////////////
+
+/*
 $b = new DxfBlock(array('name' => 'test'));
-$b->append(new DxfSolid(array('points' => array(array(0, 0),
+$b->append(
+			new DxfSolid(array('points' => array(array(0, 0),
 											array(1, 0), 
 											array(1, 1), 
 											array(0, 1)),
@@ -47,7 +88,7 @@ $d->append(new DxfLine(array('lineType'=>'DASHED',
 							'points'=>array(array(0, 0), 
 										array(5, 5))
 )));
-/*
+
 $d->append(new DxfLwPolyLine(array('points'=>array(array(0, 0),
 										array(1, 0), 
 										array(1, 1), 
@@ -59,7 +100,7 @@ $d->append(new DxfLwPolyLine(array('points'=>array(array(0, 0),
             				'lineType'=>'CONTINUOUS',
             				'lineWeight' => 0)
 ));
-*/
+
 
 $d->append(new DxfPolyLine(array('points'=>array(array(1, 1),
 										array(20, 10), 
@@ -81,10 +122,7 @@ $d->append(new DxfSolid(array('points' => array(array(4, 4),
 										array(9, 9)),
 							'color' => 3)
 ));
-$d->append(new DxfText(array('text' => 'Testing testing!', 
-						'point' => array(3, 0)
-)));
+*/
 
-$d->saveAs('test.dxf');
 
 ?>

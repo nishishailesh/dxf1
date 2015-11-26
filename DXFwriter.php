@@ -144,6 +144,12 @@ class DxfWriter extends DxfCollection{
 		fwrite($fh, sprintf("%s", $this));
 		fclose($fh);
 	}
+	
+	function saveDownload(){
+	header ('Content-Type: application/octet-stream');
+	header('Content-Disposition: attachment; filename=test.dxf');
+	echo $this;
+	}
 }
 
 

@@ -9,12 +9,13 @@ $dw=$_POST['dw'];
 $dh=$_POST['dh'];
 
 ////////////How to insert text//////////////
+/*
 $txt['text'] = $_POST['text'] ;
 $txt['point'] = array($dw/2,$dh/2,0);
 $txt['height'] = $_POST['text_height'];
 $txt_str=new DxfText($txt);
 $d->append($txt_str);
-
+*/
 
 /////////////How to draw polyline///////////
 
@@ -25,11 +26,10 @@ $poly['points']=array	(
 							array(0,$dh),
 							array(0,0)
 						);
+						
+
 $door_str=new DxfPolyLine($poly);
 $d->append($door_str);
-
-//$dw=$_POST['dw']-5;
-//$dh=$_POST['dh']-5;
 
 $poly['points']=array	(
 							array(0+3,0+3),
@@ -38,10 +38,19 @@ $poly['points']=array	(
 							array(0+3,$dh-3),
 							array(0+3,0+3)
 						);
+
 $door_str=new DxfPolyLine($poly);
 $d->append($door_str);
+
+if($_POST['hatch']=='yes')
+{
+	$poly['pattern']=$_POST['pattern'];												
+	$door_str=new DxfHatchPolyLine($poly);
+	$d->append($door_str);
+}
 ///////////How to download file/////////////
 $d->saveDownload('test.dxf');
+
 /////////////////////////////////////////////
 
 /*

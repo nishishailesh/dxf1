@@ -36,7 +36,7 @@ class DxfStyle extends DxfBaseClass{
 		$defaults['mirror'] = 0;
 		$defaults['lastHeight'] = 1;
 		$defaults['font'] = 'arial.ttf';
-		$defaults['bigFont'] = '';
+		$defaults['bigFont'] = 'arial.ttf';
 		parent::__construct(array_merge($defaults, $attributes));
 	}
 

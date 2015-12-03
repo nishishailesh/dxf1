@@ -19,6 +19,8 @@ require_once 'lib/Point.php';
 require_once 'lib/PolyLine.php';
 require_once 'lib/Solid.php';
 require_once 'lib/Text.php';
+require_once 'lib/Hatch.php';
+
 
 
 
@@ -47,7 +49,7 @@ class DxfWriter extends DxfCollection{
 		$this->layers = array(new DxfLayer());
 		$this->lineTypes = array(new DxfLineType());
 		$this->styles = array(new DxfStyle());
-		$this->views = array();
+		$this->views = array(new DxfStyle());
 		
 		//echo print_r($this->attributes);
 	}

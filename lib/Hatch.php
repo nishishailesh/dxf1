@@ -2,18 +2,12 @@
 require_once 'Entity.php';
 
 /**
-* PolyLine
-* This is a LWPOLYLINE. I have no idea how it differs from a normal PolyLine
-* I am not sure if the class works, but i doesn't break things...
-*
-* TODO: Finish polyline (now implemented as a series of lines)
-*
-* subclass of Entity
+* HatchPolyLine
+* subclass of Polyline
 * 
 * Used attributes
-* points (required) default none
-* flag default 0
-* width (optional)
+* points (required) default=none, by its parent
+* pattern default=ANSI38
 */
 
 
@@ -50,9 +44,8 @@ ANSI38
 1
 20
 1
-
-
 */
+
 class DxfHatchPolyLine extends DxfPolyLine{
 
 	/*
@@ -64,6 +57,7 @@ class DxfHatchPolyLine extends DxfPolyLine{
 	*/
 	function __construct($attributes = array()){
 		$defaults = array();
+		$defaults['Scale']=10;
 		$defaults['pattern'] = 'ANSI38';
 		parent::__construct(array_merge($defaults, $attributes));
 	}
@@ -79,10 +73,9 @@ class DxfHatchPolyLine extends DxfPolyLine{
 		//parent::__toString();
 		
 		// TODO all are string values, maybee som should be decimal
-		$result = sprintf(
-"0\nHATCH\n2\n%s\n91\n1\n92\n2\n72\n1\n72\n0\n73\n1\n"
-						,$this->attributes['pattern']);
-						
+		$result = sprintf("0\nHATCH\n2\n%s\n91\n1\n92\n2\n72\n1\n72\n0\n73\n1\n41\n10\n",$this->attributes['pattern']);
+
+		//$result = sprintf("0\nHATCH\n  2\nANSI34\n91\n1\n92\n2\n72\n1\n72\n0\n73\n1\n");						
 		$num_vertices=count($this->attributes['points']);
 		$result .=sprintf("93\n%s\n",$num_vertices);
 

@@ -19,8 +19,9 @@ require_once 'lib/Point.php';
 require_once 'lib/PolyLine.php';
 require_once 'lib/Solid.php';
 require_once 'lib/Text.php';
+//Added by S M Patel
 require_once 'lib/Hatch.php';
-
+require_once 'lib/Dimension.php';
 
 
 
@@ -49,7 +50,7 @@ class DxfWriter extends DxfCollection{
 		$this->layers = array(new DxfLayer());
 		$this->lineTypes = array(new DxfLineType());
 		$this->styles = array(new DxfStyle());
-		$this->views = array(new DxfStyle());
+		$this->views = array(new DxfView());
 		
 		//echo print_r($this->attributes);
 	}
@@ -146,7 +147,9 @@ class DxfWriter extends DxfCollection{
 		fwrite($fh, sprintf("%s", $this));
 		fclose($fh);
 	}
-	
+
+///////////How to download file/////////////
+///////////Function created by SMP in DXFwriter.php/////	
 	function saveDownload(){
 	header ('Content-Type: application/octet-stream');
 	header('Content-Disposition: attachment; filename=test.dxf');

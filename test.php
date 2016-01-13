@@ -46,7 +46,10 @@ $d->append($door_str);
 
 if($_POST['hatch']=='yes')
 {
-	$poly['pattern']=$_POST['pattern'];												
+	$poly['scale']=2;
+	$poly['color']=200;	
+	$poly['pattern']=$_POST['pattern'];
+	$poly['lineweight']=1;											
 	$door_str=new DxfHatchPolyLine($poly);
 	$d->append($door_str);
 }

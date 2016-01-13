@@ -4,10 +4,12 @@ require_once 'Entity.php';
 /**
 * HatchPolyLine
 * subclass of Polyline
+* Can not hatch if it is not a polyline
 * 
 * Used attributes
-* points (required) default=none, by its parent
+* points (required) default=none, required by its parent
 * pattern default=ANSI38
+* 
 */
 
 
@@ -59,6 +61,8 @@ class DxfHatchPolyLine extends DxfPolyLine{
 		$defaults = array();
 		$defaults['Scale']=10;
 		$defaults['pattern'] = 'ANSI38';
+		$defaults['color']=255;
+		$defaults['weight']=1;
 		parent::__construct(array_merge($defaults, $attributes));
 	}
 
@@ -73,7 +77,12 @@ class DxfHatchPolyLine extends DxfPolyLine{
 		//parent::__toString();
 		
 		// TODO all are string values, maybee som should be decimal
-		$result = sprintf("0\nHATCH\n2\n%s\n91\n1\n92\n2\n72\n1\n72\n0\n73\n1\n41\n10\n",$this->attributes['pattern']);
+		//not scale
+		//$result = sprintf("0\nHATCH\n2\n%s\n91\n1\n92\n2\n72\n1\n72\n0\n73\n1\n41\n10\n",$this->attributes['pattern']);
+
+		//with scale
+		$result = sprintf("0\nHATCH\n2\n%s\n91\n1\n92\n2\n72\n1\n72\n0\n73\n1\n41\n%d\n62\n%d\n370\n%d\n",
+				$this->attributes['pattern'],$this->attributes['scale'],$this->attributes['color'],$this->attributes['lineweight']);
 
 		//$result = sprintf("0\nHATCH\n  2\nANSI34\n91\n1\n92\n2\n72\n1\n72\n0\n73\n1\n");						
 		$num_vertices=count($this->attributes['points']);

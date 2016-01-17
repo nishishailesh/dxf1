@@ -62,7 +62,7 @@ class DxfHatchPolyLine extends DxfPolyLine{
 		$defaults['Scale']=10;
 		$defaults['pattern'] = 'ANSI38';
 		$defaults['color']=255;
-		$defaults['weight']=1;
+		$defaults['lineweight']=1;
 		parent::__construct(array_merge($defaults, $attributes));
 	}
 

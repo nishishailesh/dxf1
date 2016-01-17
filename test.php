@@ -27,6 +27,14 @@ $poly['points']=array	(
 						);
 						
 
+$dt['lineWidth']=0;
+$dt['name']='jj';
+$dt['thickness']=0;
+
+$ll=new DxfLayer($dt);
+
+$poly['layer']='jj';
+
 $door_str=new DxfPolyLine($poly);
 $d->append($door_str);
 
@@ -37,6 +45,8 @@ $poly['points']=array	(
 							array(0+3,$dh-3),
 							array(0+3,0+3)
 						);
+
+
 
 $door_str=new DxfPolyLine($poly);
 $d->append($door_str);
@@ -57,9 +67,9 @@ if($_POST['hatch']=='yes')
 ////////How to write dimension/////////////
 ///////Added by SMP at lib/dimension.php///////
 
-$poly['fp']=array(3,10);
-$poly['sp']=array(13,12);
-$poly['offset']=-2;
+$poly['fp']=$poly['points'][0];
+$poly['sp']=$poly['points'][1];
+$poly['offset']=2;
 
 $door_dim=new DxfDimension($poly);
 $d->append($door_dim);

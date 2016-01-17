@@ -3,7 +3,10 @@
 
 require 'DXFwriter.php';
 
-$d = new DxfWriter();
+
+$vars['dimscale']=30;
+
+$d = new DxfWriter($vars);
 
 $dw=$_POST['dw'];
 $dh=$_POST['dh'];
@@ -69,7 +72,7 @@ if($_POST['hatch']=='yes')
 
 $poly['fp']=$poly['points'][0];
 $poly['sp']=$poly['points'][1];
-$poly['offset']=2;
+$poly['offset']=4;
 
 $door_dim=new DxfDimension($poly);
 $d->append($door_dim);

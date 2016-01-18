@@ -5,6 +5,7 @@ require 'DXFwriter.php';
 
 
 $vars['dimscale']=30;
+$vars['dimdec']=2;
 
 $d = new DxfWriter($vars);
 

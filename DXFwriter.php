@@ -39,6 +39,7 @@ class DxfWriter extends DxfCollection{
 		$defaults['extmin'] = array(0.0, 0.0);
 		$defaults['extmax'] = array(0.0, 0.0);
 		$defaults['dimscale'] = 1;
+		$defaults['dimdec'] = 0;
 		$defaults['fileName'] = 'test.dxf';
 		//$defaults['tdcreate'] = time();
 		
@@ -121,7 +122,9 @@ class DxfWriter extends DxfCollection{
 		$this->header[] = $this->point('insbase', $this->attributes['insbase']);
 		$this->header[] = $this->point('extmin', $this->attributes['extmin']);
 		$this->header[] = $this->point('extmax', $this->attributes['extmax']);
+		//Added by Dr S M Patel
 		$this->header[] = sprintf("9\n\$DIMSCALE\n40\n%d\n",$this->attributes['dimscale']);
+		$this->header[] = sprintf("9\n\$DIMDEC\n40\n%d\n",$this->attributes['dimdec']);
 		
 		//$this->header[] = $this->point('extmax', $this->attributes['extmax']);
 		//$this->header[] = sprintf("9\n\$%s\n40\n%s\n",'TDCREATE', tdDate($this->attributes['tdcreate'])); 
